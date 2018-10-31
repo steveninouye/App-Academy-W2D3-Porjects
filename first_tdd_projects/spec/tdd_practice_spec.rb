@@ -1,7 +1,6 @@
 require 'tdd_practice'
-require 'rspec'
 
-Rspec.describe do
+RSpec.describe do
   let(:array1) {[1,2,1,3,3,-1]}
   let(:array2) {[1,2,1,3,3]}
   let(:array3) {[1,2,1,3,3,-1,-1]}
@@ -33,7 +32,7 @@ Rspec.describe do
   describe "#my_transpose" do
     let(:rows) {[[0, 1, 2],[3, 4, 5],[6, 7, 8]]}
     it "convert between the row-oriented and column-oriented representations" do
-      expect(rows.my_transpose)to eq([[0, 3, 6],[1, 4, 7],[2, 5, 8]])
+      expect(rows.my_transpose).to eq([[0, 3, 6],[1, 4, 7],[2, 5, 8]])
     end
 
     it "returns an empty array if array is empty" do
@@ -41,7 +40,29 @@ Rspec.describe do
     end
 
     it "handles a rectangular array" do
-      expect(array1.my_transpose).to eq([[1],[2],[1],[3],[3],[-1]])
+      expect([array1].my_transpose).to eq([[1],[2],[1],[3],[3],[-1]])
+    end
+  end
+  #
+  # let(:array1) {[1,2,1,3,3,-1]}
+  # let(:array2) {[1,2,1,3,3]}
+  # let(:array3) {[1,2,1,3,3,-1,-1]}
+
+  describe "#stock_picker" do
+    it "returns the index with the lowest value and index with the highest value" do
+      expect([1,2,3,4,5].stock_picker).to eq([0,4])
+    end
+
+    it "does not sell before it buys" do
+      expect(array3.stock_picker).to eq([0,3])
+    end
+
+    it "returns the earliest buy and sell day" do
+      expect(array1.stock_picker).to eq([0,3])
+    end
+
+    it "returns nil if you can't make a profit" do
+      expect([4,3,2,1].stock_picker).to be_nil
     end
   end
 
